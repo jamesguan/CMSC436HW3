@@ -49,7 +49,7 @@ var colors2 = {
   "Untreated": '#b15928' // [255,255,153]
 };
 
-//var colors = ['#a6cee3', '#b2df8a', '#fb9a99', '#fdbf6f', '#cab2d6', '#ffff99'];
+var colors = ['#a6cee3', '#b2df8a', '#fb9a99', '#fdbf6f', '#cab2d6', '#ffff99'];
 
 // Scale chart and canvas height
 d3.select("#chart")
@@ -142,8 +142,8 @@ var max = 70;
               d3.scale.log()
               .domain([min, max])
               .range([h, 0])); 
-      //.domain(d3.extent(data, function(d) { return +d[k]; }))
-     // .range([h, 0]));
+              .domain(d3.extent(data, function(d) { return +d[k]; }))
+              .range([h, 0]));
   }));
 
   // Add a status element for each dimension.
@@ -383,7 +383,7 @@ function unhighlight() {
   highlighted.clearRect(0,0,w,h);
 }
 
-/*
+
 function invert_axis(d) {
   // save extent before inverting
   if (!yscale[d].brush.empty()) {
@@ -404,10 +404,10 @@ function invert_axis(d) {
   }
   return extent;
 }
-*/
+
 
 // Draw a single polyline
-/*
+
 function path(d, ctx, color) {
   if (color) ctx.strokeStyle = color;
   var x = xscale(0)-15;
@@ -422,7 +422,7 @@ function path(d, ctx, color) {
   ctx.lineTo(x+15, y);                               // right edge
   ctx.stroke();
 }
-*/
+
 
 function path(d, ctx, color) {
   if (color) ctx.strokeStyle = color;
@@ -447,13 +447,13 @@ function path(d, ctx, color) {
 
 function color(d,a) {
   var c = colors[d];
-  //return ["hsla(",c[0],",",c[1],"%,",c[2],"%,",a,")"].join("");
+  return ["hsla(",c[0],",",c[1],"%,",c[2],"%,",a,")"].join("");
   return c; 
 }
  
 function color2(d,a) {
   var c = colors2[d];
-  //return ["hsla(",c[0],",",c[1],"%,",c[2],"%,",a,")"].join("");
+  return ["hsla(",c[0],",",c[1],"%,",c[2],"%,",a,")"].join("");
   return c; 
 }
 
@@ -520,7 +520,7 @@ function brush() {
            org = 'Lymph Node';
           if(group === d.Therapy && org === d.Organ) result = false; }
       }); 
-      // var inc = !(_.contains(excluded_groups, d.Therapy) &&   );
+      var inc = !(_.contains(excluded_groups, d.Therapy) &&   );
       return result;
     })
     .map(function(d) {
@@ -828,7 +828,7 @@ d3.select("#light-theme").on("click", light_theme);
 
 function hide_ticks() {
   d3.selectAll(".axis g").style("display", "none");
-  //d3.selectAll(".axis path").style("display", "none");
+  d3.selectAll(".axis path").style("display", "none");
   d3.selectAll(".background").style("visibility", "hidden");
   d3.selectAll("#hide-ticks").attr("disabled", "disabled");
   d3.selectAll("#show-ticks").attr("disabled", null);
@@ -836,7 +836,7 @@ function hide_ticks() {
 
 function show_ticks() {
   d3.selectAll(".axis g").style("display", null);
-  //d3.selectAll(".axis path").style("display", null);
+  d3.selectAll(".axis path").style("display", null);
   d3.selectAll(".background").style("visibility", null);
   d3.selectAll("#show-ticks").attr("disabled", "disabled");
   d3.selectAll("#hide-ticks").attr("disabled", null);
